@@ -99,3 +99,23 @@ stores = [{
         "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1rdpJ0z0R6DEyaoqpkmHyKVYuKQXdCbQ&ehbc=2E312F" width="640" height="480"></iframe>`,
     },
 ];
+
+
+
+stores.forEach(e => {
+    document.getElementById("select1").innerHTML += `<option>${e.grad}</option>`
+});
+
+
+
+function getOption() {
+
+    selectElement = document.querySelector('#select1');
+    output = selectElement.value;
+
+    stores.forEach(e => {
+        if(output==e.grad){
+            document.querySelector('.output2').innerHTML = e.link;
+        }
+    });
+}
