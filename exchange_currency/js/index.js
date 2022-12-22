@@ -106,7 +106,9 @@ stores.forEach(e => {
     document.getElementById("select1").innerHTML += `<option>${e.grad}</option>`
 });
 
-
+function getVikends() {
+    document.querySelector('.output2').innerHTML = '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1rE--qHGLLCRtGcOqCfZ-8245zCoWGL4&ehbc=2E312F" width="640" height="480"></iframe>'
+}
 
 function getOption() {
 
