@@ -1,42 +1,101 @@
-var map;
-var markers = [];
-var infoWindow;
-var locationSelect;
-
-
-function initMap() {
-    var losAngeles = { lat: 34.063380, lng: -118.358080 };
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: losAngeles,
-        zoom: 11,
-        mapTypeId: 'roadmap',
-    });
-    showStoreMarkers();
-};
-
-
-function showStoreMarkers() {
-    stores.forEach(function(store, index) {
-        var latlng = new google.maps.LatLng(
-            store.coordinates.latitude,
-            store.coordinates.longitude
-        );
-        var name = store.name;
-        var address = store.addressLines[0];
-        createMarker(latlng, name, address);
-    });
-};
-
-
-function createMarker(latlng, name, address) {
-    var html = "<b>" + name + "</b> <br/>" + address;
-    var marker = new google.maps.Marker({
-        map: map,
-        position: latlng
-    });
-    google.maps.event.addListener(marker, 'click', function () {
-         infoWindow.setContent(html);
-         infoWindow.open(map, marker);
-     });
-    markers.push(marker);
-};
+stores = [{
+    "grad": "Сите",
+    "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1M22in3MWchInLAcKswEBiRA7d5bw3b4&ehbc=2E312F" width="640" height="480"></iframe>`,
+},
+    {
+        "grad": "Скопје",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=118fJIpBGhkskNrzFBAI1QUlf7ZpE-5U&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Охрид",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1P919zia1vvvf08U6BK591SgrBWcKLQE&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Кавадарци",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1YjWeLXNFt0FdIsLNQOPhgWTaEhzVjpY&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Кочани",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1M-ldlVRxecloOpeNzIY26jh6fe3RrX0&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Штип",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=17h41hRPREQGsYPHNgsCUz_uxjFlv2Eg&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Дојран",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1RDMSSSIRxmIEWoghMinlOXv3o8FdnxY&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Велес",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1vMYzXyMyh2MOe2amPOWQYwJwJEUjy8M&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Демир Капија",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1MNfMDA5GVWLLS6r83vju2pD_zXRpm6A&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Пробиштип",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1yJhAfuKan8tp4GtQBuSBonkVHhHGq98&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Куманово",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1zIAF0dQqW37p38oVKGKl7_DnKK21Ctc&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Струмица",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1nJVrBccmWqlNU2d1umcS7wdF23-xERY&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Неготино",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1Nw_jjW438ppDmqWpznQyQ8iAEzKb6nw&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Тетово",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=10areQCDSxUcxxSrw8_jB1tco9kMC-O4&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Делчево",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1EYLwLC4f0TQlEiG_8i5K-9iwkU7EGNk&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Берово",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1JUiv_HZUh1NuWDWdiCmr45D8LUZw324&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Виница",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=19SNLhRO39DeBSt8nL-H2fy1wY7Gk_vA&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Македонска Каменица",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1pSKQgwSydjnSdOUzIcLog4AT8acoMg0&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Пехчево",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=139vY5y1TgF_kX5XOIcDqJ3YmfSPxDu0&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Дебар",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1Ua_IxSkhfE6nRwpCUxtV9e2O2ZmEdiw&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Свети Николе",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1FmtaxeyfADqhh_ZcXjeKrd3KlwM4MQ0&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Струга",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1uD49CAsU59OBRwQdYWV6DklR8WbYypE&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Битола",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1QutI0H_ZwnWAnWk5gSBlFqhUTApvyj4&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Прилеп",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1wNUJQxhw7tULz3AdBFvAL8rzue9t1oI&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+    {
+        "grad": "Гостивар",
+        "link": `<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1rdpJ0z0R6DEyaoqpkmHyKVYuKQXdCbQ&ehbc=2E312F" width="640" height="480"></iframe>`,
+    },
+];
